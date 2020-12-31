@@ -12,6 +12,11 @@ import 'package:flutter_svg/svg.dart';
 class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    String firstName = "";
+    String lastName = "";
+    String email = "";
+    String password = "";
+
     Size size = MediaQuery.of(context).size;
     return Background(
       child: SingleChildScrollView(
@@ -28,15 +33,49 @@ class Body extends StatelessWidget {
               height: size.height * 0.35,
             ),
             RoundedInputField(
+              hintText: "First Name",
+              onChanged: (value) {
+                firstName = value;
+              },
+            ),
+            RoundedInputField(
+              hintText: "Last Name",
+              onChanged: (value) {
+                lastName = value;
+              },
+            ),
+            RoundedInputField(
               hintText: "Your Email",
-              onChanged: (value) {},
+              onChanged: (value) {
+                email = value;
+              },
             ),
             RoundedPasswordField(
-              onChanged: (value) {},
+              onChanged: (value) {
+                password = value;
+              },
             ),
             RoundedButton(
               text: "SIGNUP",
-              press: () {},
+              press: () {
+                return showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      // Retrieve the text the that user has entered by using the
+                      // TextEditingController.
+                      content: Text("Name : " +
+                          firstName +
+                          "\nLast : " +
+                          lastName +
+                          "\nemail : " +
+                          email +
+                          "\npassword : " +
+                          password),
+                    );
+                  },
+                );
+              },
             ),
             SizedBox(height: size.height * 0.03),
             AlreadyHaveAnAccountCheck(
